@@ -11,10 +11,10 @@ class HexletCodeTest < Minitest::Test
 
   def test_builder
     assert_equal "<br>", HexletCode::Tag.build("br")
-    assert_equal "<img src=\"path/to/image\">", HexletCode::Tag.build("img", src: "path/to/image")
-    assert_equal "<input type=\"submit\" value=\"Save\">", HexletCode::Tag.build("input", type: "submit", value: "Save")
+    assert_equal '<img src="path/to/image">', HexletCode::Tag.build("img", src: "path/to/image")
+    assert_equal '<input type="submit" value="Save">', HexletCode::Tag.build("input", type: "submit", value: "Save")
     assert_equal "<label>Email</label>", HexletCode::Tag.build("label") { "Email" }
-    assert_equal "<label for=\"email\">Email</label>", HexletCode::Tag.build("label", for: "email") { "Email" }
+    assert_equal '<label for="email">Email</label>', HexletCode::Tag.build("label", for: "email") { "Email" }
   end
 
   def test_selected
@@ -39,9 +39,22 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text
       f.input :gender, as: :select, collection: %w[m f]
     end
-    should_return = "<form action=\"#\" method=\"post\"><input type=\"text\" value=\"rob\" name=\"name\">" \
-    "<textarea cols=\"20\" rows=\"40\" name=\"job\">hexlet</textarea><select name=\"gender\">" \
-    "<option value=\"m\" selected>m</option><option value=\"f\">f</option></select></form>"
+    assert_equal form, '<form action="#" method="post"><label for="name">Name</label>' \
+    '<input type="text" value="rob" name="name"><label for="job">Job</label>' \
+    '<textarea cols="20" rows="40" name="job">hexlet</textarea><label for="gender">Gender</label>' \
+    '<select name="gender"><option value="m" selected>m</option><option value="f">f</option></select></form>'
+  end
+
+  def test_submit
+    user = User.new job: "hexlet"
+    form = HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job
+      f.submit
+    end
+    should_return = '<form action="#" method="post"><label for="name">Name</label><input type="text" name="name">' \
+    '<label for="job">Job</label><input type="text" name="job" value="hexlet">' \
+    '<input type="submit" value="Save" name="commit"></form>'
     assert_equal should_return, form
   end
 end

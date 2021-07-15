@@ -45,6 +45,7 @@ module HexletCode
     end
 
     def input(field_name, as: nil, collection: [])
+      @fields += Tag.build("label", for: field_name) { field_name.to_s.capitalize }
       @fields += case as
                  when :text
                    Tag.build("textarea", cols: 20, rows: 40, name: field_name) { user.send(field_name) }
@@ -53,6 +54,10 @@ module HexletCode
                  else
                    Tag.build("input", type: "text", value: user.send(field_name), name: field_name)
                  end
+    end
+
+    def submit(button_name = "Save")
+      @fields += Tag.build("input", type: "submit", value: button_name, name: "commit")
     end
   end
 
