@@ -22,16 +22,6 @@ class HexletCodeTest < Minitest::Test
       .build('option', value: 'm', selected: true) { 'm' }
   end
 
-  def test_empty_form_for
-    user = User.new name: 'rob'
-    form = HexletCode.form_for user do |f|
-    end
-    assert_equal '<form action="#" method="post"></form>', form
-    form = HexletCode.form_for user, url: '/users' do |f|
-    end
-    assert_equal '<form action="/users" method="post"></form>', form
-  end
-
   def test_form_for_with_fields
     user = User.new name: 'rob', job: 'hexlet', gender: 'm'
     form = HexletCode.form_for user do |f|
@@ -40,9 +30,9 @@ class HexletCodeTest < Minitest::Test
       f.input :gender, as: :select, collection: %w[m f]
     end
     assert_equal form, '<form action="#" method="post"><label for="name">Name</label>' \
-    '<input name="name" type="text" value="rob"><label for="job">Job</label>' \
-    '<textarea name="job" cols="20" rows="40">hexlet</textarea><label for="gender">Gender</label>' \
-    '<select name="gender"><option value="m" selected>m</option><option value="f">f</option></select></form>'
+                       '<input name="name" type="text" value="rob"><label for="job">Job</label>' \
+                       '<textarea name="job" cols="20" rows="40">hexlet</textarea><label for="gender">Gender</label>' \
+                       '<select name="gender"><option value="m" selected>m</option><option value="f">f</option></select></form>'
   end
 
   def test_submit
@@ -53,8 +43,8 @@ class HexletCodeTest < Minitest::Test
       f.submit
     end
     should_return = '<form action="#" method="post"><label for="name">Name</label>' \
-    '<input name="name" type="text" value=""><label for="job">Job</label>' \
-    '<input name="job" type="text" value="hexlet"><input type="submit" value="Save" name="commit"></form>'
+                    '<input name="name" type="text" value=""><label for="job">Job</label>' \
+                    '<input name="job" type="text" value="hexlet"><input type="submit" value="Save" name="commit"></form>'
     assert_equal should_return, form
   end
 end
