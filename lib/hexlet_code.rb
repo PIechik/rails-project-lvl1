@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "hexlet_code/version"
+require_relative 'hexlet_code/version'
 
 # This module generates html forms
 module HexletCode
@@ -13,11 +13,11 @@ module HexletCode
       hash.each do |key, value|
         line += " #{key}=\"#{value}\"" if key != :selected
       end
-      line += " selected" if hash[:selected]
+      line += ' selected' if hash[:selected]
       line += if block_given?
                 ">#{yield}</#{tag}>"
               else
-                ">"
+                '>'
               end
     end
   end
@@ -28,16 +28,16 @@ module HexletCode
 
     def initialize(user)
       @user = user
-      @fields = ""
+      @fields = ''
     end
 
     def select_constructor(field_name, hash)
-      Tag.build("select", hash.reject { |k| k == :collection }) do
+      Tag.build('select', hash.reject { |k| k == :collection }) do
         options = hash[:collection].each_with_object([]) do |element, object|
           object << if user.send(field_name) == element
-                      Tag.build("option", value: element, selected: true) { element }
+                      Tag.build('option', value: element, selected: true) { element }
                     else
-                      Tag.build("option", value: element) { element }
+                      Tag.build('option', value: element) { element }
                     end
         end
         options.join
@@ -47,17 +47,17 @@ module HexletCode
     def textarea_constructor(field_name, hash)
       hash[:cols] ||= 20
       hash[:rows] ||= 40
-      Tag.build("textarea", hash) { user.send(field_name) }
+      Tag.build('textarea', hash) { user.send(field_name) }
     end
 
     def input_constructor(field_name, hash)
-      hash[:type] ||= "text"
+      hash[:type] ||= 'text'
       hash[:value] = user.send(field_name)
-      Tag.build("input", hash)
+      Tag.build('input', hash)
     end
 
     def input(field_name, hash = {})
-      @fields += Tag.build("label", for: field_name) { field_name.to_s.capitalize }
+      @fields += Tag.build('label', for: field_name) { field_name.to_s.capitalize }
       as = hash[:as]
       hash.reject! { |k| k == :as }
       hash[:name] = field_name
@@ -68,14 +68,14 @@ module HexletCode
                  end
     end
 
-    def submit(button_name = "Save")
-      @fields += Tag.build("input", type: "submit", value: button_name, name: "commit")
+    def submit(button_name = 'Save')
+      @fields += Tag.build('input', type: 'submit', value: button_name, name: 'commit')
     end
   end
 
-  def self.form_for(user, url: "#")
+  def self.form_for(user, url: '#')
     form = Form.new(user)
-    Tag.build("form", action: url, method: "post") do
+    Tag.build('form', action: url, method: 'post') do
       yield form
     end
   end
