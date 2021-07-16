@@ -31,10 +31,10 @@ module HexletCode
       @fields = ""
     end
 
-    def select_constructor(field_name, collection)
-      Tag.build("select", name: field_name) do
-        options = collection.each_with_object([]) do |element, object|
-          object << if user.gender == element
+    def select_constructor(field_name, hash)
+      Tag.build("select", hash.reject { |k| k == :collection }) do
+        options = hash[:collection].each_with_object([]) do |element, object|
+          object << if user.send(field_name) == element
                       Tag.build("option", value: element, selected: true) { element }
                     else
                       Tag.build("option", value: element) { element }
@@ -44,15 +44,27 @@ module HexletCode
       end
     end
 
-    def input(field_name, as: nil, collection: [])
+    def textarea_constructor(field_name, hash)
+      hash[:cols] ||= 20
+      hash[:rows] ||= 40
+      Tag.build("textarea", hash) { user.send(field_name) }
+    end
+
+    def input_constructor(field_name, hash)
+      hash[:type] ||= "text"
+      hash[:value] = user.send(field_name)
+      Tag.build("input", hash)
+    end
+
+    def input(field_name, hash = {})
       @fields += Tag.build("label", for: field_name) { field_name.to_s.capitalize }
+      as = hash[:as]
+      hash.reject! { |k| k == :as }
+      hash[:name] = field_name
       @fields += case as
-                 when :text
-                   Tag.build("textarea", cols: 20, rows: 40, name: field_name) { user.send(field_name) }
-                 when :select
-                   select_constructor(field_name, collection)
-                 else
-                   Tag.build("input", type: "text", value: user.send(field_name), name: field_name)
+                 when :text then textarea_constructor(field_name, hash)
+                 when :select then select_constructor(field_name, hash)
+                 else input_constructor(field_name, hash)
                  end
     end
 
