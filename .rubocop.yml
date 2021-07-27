@@ -14,3 +14,6 @@ Layout/LineLength:
 
 Naming/MethodParameterName:
   AllowedNames: -as
+
+Style/Documentation:
+  Enabled: false

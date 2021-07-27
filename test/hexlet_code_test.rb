@@ -9,19 +9,6 @@ class HexletCodeTest < Minitest::Test
 
   User = Struct.new(:name, :job, :gender, keyword_init: true)
 
-  def test_builder
-    assert_equal '<br>', HexletCode::Tag.build('br')
-    assert_equal '<img src="path/to/image">', HexletCode::Tag.build('img', src: 'path/to/image')
-    assert_equal '<input type="submit" value="Save">', HexletCode::Tag.build('input', type: 'submit', value: 'Save')
-    assert_equal '<label>Email</label>', HexletCode::Tag.build('label') { 'Email' }
-    assert_equal '<label for="email">Email</label>', HexletCode::Tag.build('label', for: 'email') { 'Email' }
-  end
-
-  def test_selected
-    assert_equal '<option value="m" selected>m</option>', HexletCode::Tag
-      .build('option', value: 'm', selected: true) { 'm' }
-  end
-
   def test_form_for
     user = User.new name: 'rob', job: 'hexlet', gender: 'm'
     form = HexletCode.form_for user do |f|
@@ -41,7 +28,7 @@ class HexletCodeTest < Minitest::Test
       f.submit
     end
     should_return = '<form action="#" method="post"><label for="name">Name</label>' \
-                    '<input name="name" type="text" value=""><input type="submit" value="Save" name="commit"></form>'
+                    '<input name="name" value="" type="text"><input type="submit" name="commit" value="Save"></form>'
     assert_equal should_return, form
   end
 end
