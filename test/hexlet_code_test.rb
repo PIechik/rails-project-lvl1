@@ -15,7 +15,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text
       f.input :gender, as: :select, collection: %w[m f]
     end
-    assert_equal form, '<form action="#" method="post"><label for="job">Job</label>' \
+    assert_equal form, '<form method="post" action="#"><label for="job">Job</label>' \
                        '<textarea name="job" cols="20" rows="40">hexlet</textarea><label for="gender">Gender</label>' \
                        '<select name="gender"><option value="m" selected>m</option><option value="f">f</option>' \
                        '</select></form>'
@@ -27,8 +27,8 @@ class HexletCodeTest < Minitest::Test
       f.input :name
       f.submit
     end
-    should_return = '<form action="#" method="post"><label for="name">Name</label>' \
-                    '<input name="name" value="" type="text"><input type="submit" name="commit" value="Save"></form>'
+    should_return = '<form method="post" action="#"><label for="name">Name</label>' \
+                    '<input value="" type="text" name="name"><input value="Save" type="submit" name="commit"></form>'
     assert_equal should_return, form
   end
 end

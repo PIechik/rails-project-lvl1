@@ -1,8 +1,6 @@
 # HexletCode
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hexlet_code`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem renders html forms
 
 ## Installation
 
@@ -22,7 +20,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+User = Struct.new(:name, :job, :gender, keyword_init: true)
+user = User.new name: 'rob', job: 'hexlet', gender: 'm'
+
+form = HexletCode.form_for user do |f|
+  f.input :name
+  f.input :job, as: :text
+  f.input :gender, as: :select, collection: %w[m f]
+  f.submit
+end
+
+# <form action="#" method="post">
+#   <label for="name">Name</label>
+#   <input type="text" name="name">
+#   <label for="job">Job</label>
+#   <textarea cols="20" rows="40" name="job">hexlet</textarea>
+#   <label for="gender">Gender</label>
+#   <select name="gender">
+#     <option value="m" selected>m</option>
+#     <option value="f">f</option>
+#   </select>
+#   <input type="submit" value="Save" name="commit">
+# </form>
+```
 
 ## Development
 
