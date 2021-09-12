@@ -15,7 +15,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text
       f.input :gender, as: :select, collection: %w[m f]
     end
-    assert_equal File.open('./test/form1.html').read, form
+    assert_equal File.open('./test/fixtures/form1.html').read, form
   end
 
   def test_submit
@@ -24,6 +24,6 @@ class HexletCodeTest < Minitest::Test
       f.input :name
       f.submit
     end
-    assert_equal File.open('./test/form2.html').read, form
+    assert_equal File.open('./test/fixtures/form2.html').read, form
   end
 end

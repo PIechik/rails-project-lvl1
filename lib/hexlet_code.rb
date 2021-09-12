@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'hexlet_code/form'
-require_relative 'hexlet_code/form_builder'
-
 module HexletCode
-  class Error < StandardError; end
+  autoload :Form, 'hexlet_code/form.rb'
+  autoload :FormBuilder, 'hexlet_code/form_builder.rb'
+  autoload :Inputs, 'hexlet_code/inputs.rb'
+  autoload :Label, 'hexlet_code/label.rb'
+  autoload :Tag, 'hexlet_code/tag.rb'
 
   def self.form_for(user, hash = {})
     form = Form.new(hash)
