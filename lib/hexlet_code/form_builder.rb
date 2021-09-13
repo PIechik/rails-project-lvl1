@@ -28,8 +28,8 @@ module HexletCode
     end
 
     def build
-      html_representations_of_fields = form.fields.map(&:build)
-      Tag.build('form', form.attributes) { html_representations_of_fields.join }
+      rendered_fields = form.fields.map(&:build)
+      Tag.build('form', form.attributes) { rendered_fields.join }
     end
   end
 end
