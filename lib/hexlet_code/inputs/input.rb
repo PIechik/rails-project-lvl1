@@ -13,7 +13,8 @@ module HexletCode
       end
 
       def build
-        Tag.build('input', attributes.merge(value: value))
+        options = { value: value, type: 'text' }
+        Tag.build('input', options.merge(attributes))
       end
     end
   end
