@@ -1,7 +1,5 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/PIechik/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
-
 # HexletCode
+[![Actions Status](https://github.com/PIechik/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
 
 This gem renders html forms
 
