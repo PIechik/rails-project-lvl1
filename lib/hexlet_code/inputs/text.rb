@@ -2,7 +2,7 @@
 
 module HexletCode
   module Inputs
-    class Textarea < Input
+    class Text < Input
       def initialize(name, value = nill, hash = {})
         super(name, value, hash)
         @attributes[:cols] ||= 20

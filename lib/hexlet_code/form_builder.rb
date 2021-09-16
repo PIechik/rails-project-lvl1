@@ -15,11 +15,7 @@ module HexletCode
 
     def input(field_name, hash = {})
       build_label(field_name)
-      if hash[:as] == :text
-        hash[:as] = :textarea
-      elsif !hash[:as]
-        hash[:as] = :input
-      end
+      hash[:as] ||= :input
       form.fields << Inputs.const_get(hash[:as].capitalize.to_s).new(field_name, entity.send(field_name), hash)
     end
 
