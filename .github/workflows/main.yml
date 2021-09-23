@@ -10,7 +10,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        action_config_path: ".github/config/version.yml" 
+        action_config_path: ".github/.ruby-version" 
     - name: Run the default task
       run: |
         gem install bundler -v 2.2.15
