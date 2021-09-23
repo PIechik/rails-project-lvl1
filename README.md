@@ -1,5 +1,7 @@
 # HexletCode
 [![Actions Status](https://github.com/PIechik/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
+[![Actions Status](https://github.com/PIechik/rails-project-lvl1/workflows/main/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
+[![Actions Status](https://github.com/PIechik/rails-project-lvl1/workflows/linter/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
 
 This gem renders html forms
 

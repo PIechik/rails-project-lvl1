@@ -1,4 +1,4 @@
-name: Ruby
+name: Test
 
 on: [push,pull_request]
 
@@ -10,9 +10,9 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.1
+        action_config_path: ".github/config/version.yml" 
     - name: Run the default task
       run: |
         gem install bundler -v 2.2.15
         bundle install
-        bundle exec rake
+        rake test

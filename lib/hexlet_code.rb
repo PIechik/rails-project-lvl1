@@ -7,9 +7,9 @@ module HexletCode
   autoload :Label, 'hexlet_code/label.rb'
   autoload :Tag, 'hexlet_code/tag.rb'
 
-  def self.form_for(user, hash = {})
+  def self.form_for(entity, hash = {})
     form = Form.new(hash)
-    form_builder = FormBuilder.new(form, user)
+    form_builder = FormBuilder.new(form, entity)
     yield(form_builder)
     form_builder.build
   end
