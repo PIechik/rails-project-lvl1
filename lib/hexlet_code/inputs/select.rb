@@ -19,8 +19,8 @@ module HexletCode
             Option.new(elem)
           end
         end
-        text_array = options.map(&:build)
-        Tag.build('select', attributes) { text_array.join }
+        rendered_options = options.map(&:build)
+        Tag.build('select', attributes) { rendered_options.join }
       end
     end
   end
