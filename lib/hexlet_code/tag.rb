@@ -3,19 +3,17 @@
 module HexletCode
   class Tag
     def self.build(tag, options = {})
-      single_tags = ['input']
+      single_tags = %w[input br img]
       rendered_options = render_tag_options(options) unless options.empty?
-      rendered_tag = "<#{tag}#{rendered_options}>"
-      rendered_tag += "#{yield}</#{tag}>" unless single_tags.include? tag
-      rendered_tag
+      return "<#{tag} #{rendered_options}>" if single_tags.include? tag
+
+      "<#{tag} #{rendered_options}>#{yield}</#{tag}>"
     end
 
     def self.render_tag_options(options)
-      rendered_options = options.map do |key, value|
-        " #{key}=\"#{value}\"" if key != :selected
-      end
-      rendered_options << ' selected' if options[:selected]
-      rendered_options.join
+      options.map do |key, value|
+        "#{key}=\"#{value}\""
+      end.join(' ')
     end
   end
 end
