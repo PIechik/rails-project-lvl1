@@ -1,7 +1,6 @@
 # HexletCode
 [![Actions Status](https://github.com/PIechik/rails-project-lvl1/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
 [![Actions Status](https://github.com/PIechik/rails-project-lvl1/actions/workflows/main.yml/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
-[![Actions Status](https://github.com/PIechik/rails-project-lvl1/actions/workflows/linter.yml/badge.svg)](https://github.com/PIechik/rails-project-lvl1/actions)
 
 HexletCode is simple DSL for building HTML forms. It provides 3 types of inputs: input, textarea and select. With the help of this gem form creation becomes fast and effortless.
 
