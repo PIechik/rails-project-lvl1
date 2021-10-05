@@ -16,7 +16,8 @@ module HexletCode
     def input(field_name, hash = {})
       build_label(field_name)
       hash[:as] ||= :input
-      form.fields << Inputs.const_get(hash[:as].capitalize.to_s).new(field_name, entity.send(field_name), hash)
+      input_class = Inputs.const_get(hash[:as].capitalize.to_s)
+      form.fields << input_class.new(field_name, entity.send(field_name), hash)
     end
 
     def submit(value = 'Save')

@@ -5,6 +5,6 @@ require 'hexlet_code'
 
 require 'minitest/autorun'
 
-def read_file(path)
-  File.open(path).read
+def read_fixtures_from_file(file_name)
+  File.open("./test/fixtures/#{file_name}.html").read
 end

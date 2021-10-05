@@ -2,16 +2,16 @@
 
 module HexletCode
   module Inputs
-    class Select < Input
-      attr_reader :collection
-
-      def initialize(name, value = nil, hash = {})
-        @collection = hash[:collection]
-        hash.reject! { |key| key == :collection }
-        super(name, value, hash)
+    class Select < Base
+      def build
+        rendered_options = render_options(attributes[:collection])
+        attributes.reject! { |key| key == :collection }
+        Tag.build('select', attributes) { rendered_options.join }
       end
 
-      def build
+      private
+
+      def render_options(collection)
         options = collection.map do |elem|
           if elem == value
             Option.new(elem, selected: true)
@@ -19,8 +19,7 @@ module HexletCode
             Option.new(elem)
           end
         end
-        rendered_options = options.map(&:build)
-        Tag.build('select', attributes) { rendered_options.join }
+        options.map(&:build)
       end
     end
   end

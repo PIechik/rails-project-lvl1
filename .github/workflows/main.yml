@@ -1,4 +1,4 @@
-name: Test
+name: Test and lint
 
 on: [push,pull_request]
 
@@ -9,8 +9,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1 
-    - name: Run the default task
+    - name: Run tests and linting
       run: |
-        gem install bundler -v 2.2.15
-        bundle install
-        rake test
+        make install
+        make test
+        make lint

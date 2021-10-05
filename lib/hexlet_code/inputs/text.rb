@@ -2,14 +2,10 @@
 
 module HexletCode
   module Inputs
-    class Text < Input
-      def initialize(name, value = nill, hash = {})
-        super(name, value, hash)
-        @attributes[:cols] ||= 20
-        @attributes[:rows] ||= 40
-      end
-
+    class Text < Base
       def build
+        attributes[:cols] ||= 20
+        attributes[:rows] ||= 40
         Tag.build('textarea', attributes) { value }
       end
     end
